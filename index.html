@@ -1,28 +1,1157 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Andrii Danylov</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrii — Network Security Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d1117;
+    --ink-2: #1c2333;
+    --ink-3: #243047;
+    --surface: #111827;
+    --surface-2: #1a2332;
+    --surface-3: #1e2d40;
+    --accent: #2563eb;
+    --accent-bright: #3b82f6;
+    --accent-glow: rgba(59,130,246,0.12);
+    --accent-muted: rgba(59,130,246,0.08);
+    --text-1: #f0f6ff;
+    --text-2: #94a3b8;
+    --text-3: #64748b;
+    --border: rgba(148,163,184,0.1);
+    --border-accent: rgba(59,130,246,0.3);
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--text-1);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(13,17,23,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-1);
+    letter-spacing: -0.3px;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent-bright); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13.5px;
+    color: var(--text-2);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text-1); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: white !important;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 13px !important;
+    font-weight: 500;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--accent-bright) !important; color: white !important; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 80px 2rem 4rem;
+  }
+
+  .hero-canvas {
+    position: absolute;
+    inset: 0;
+    opacity: 0.35;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-name {
+    font-family: var(--display);
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    color: var(--text-1);
+  }
+
+  .hero-name em {
+    font-style: normal;
+    color: var(--accent-bright);
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-2);
+    line-height: 1.65;
+    margin-bottom: 2rem;
+    max-width: 480px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    font-family: var(--body);
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-bright);
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text-1);
+    border: 1px solid var(--border-accent);
+  }
+
+  .btn-outline:hover {
+    background: var(--accent-muted);
+    border-color: var(--accent-bright);
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 3rem;
+  }
+
+  .stat-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+  }
+
+  .stat-num {
+    font-family: var(--display);
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--accent-bright);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-3);
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  /* SECTIONS GENERAL */
+  section {
+    padding: 6rem 2rem;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--text-1);
+    margin-bottom: 1.5rem;
+    line-height: 1.15;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+
+  /* BIO */
+  #bio { background: var(--surface); }
+
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .bio-avatar-wrap {
+    position: sticky;
+    top: 80px;
+  }
+
+  .bio-avatar {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--surface-3) 0%, var(--ink-3) 100%);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .avatar-initials {
+    font-family: var(--display);
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--accent-bright);
+    letter-spacing: -0.05em;
+  }
+
+  .bio-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bio-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-2);
+    text-decoration: none;
+    font-size: 13.5px;
+    transition: all 0.2s;
+  }
+
+  .bio-link:hover {
+    border-color: var(--border-accent);
+    color: var(--text-1);
+    background: var(--accent-muted);
+  }
+
+  .bio-link svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  .bio-content p {
+    color: var(--text-2);
+    margin-bottom: 1.4rem;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .bio-content p:last-child { margin-bottom: 0; }
+
+  .bio-expertise {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: var(--accent-muted);
+    border: 1px solid var(--border-accent);
+    color: var(--accent-bright);
+    letter-spacing: 0.01em;
+  }
+
+  /* STORY */
+  #story { background: var(--ink); }
+
+  .story-timeline {
+    position: relative;
+    padding-left: 2.5rem;
+    margin-top: 3rem;
+  }
+
+  .story-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .story-node {
+    position: relative;
+    margin-bottom: 3rem;
+  }
+
+  .story-node::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 8px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--ink);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+  }
+
+  .story-year {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--accent-bright);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .story-node h3 {
+    font-family: var(--display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-1);
+    margin-bottom: 0.5rem;
+  }
+
+  .story-node p {
+    color: var(--text-2);
+    font-size: 0.97rem;
+    line-height: 1.7;
+  }
+
+  /* CAREER */
+  #career { background: var(--surface); }
+
+  .career-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .career-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    transition: border-color 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .career-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 3px 0 0 3px;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .career-card:hover {
+    border-color: var(--border-accent);
+  }
+
+  .career-card:hover::before {
+    opacity: 1;
+  }
+
+  .career-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .career-role {
+    font-family: var(--display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-1);
+  }
+
+  .career-company {
+    font-size: 0.9rem;
+    color: var(--accent-bright);
+    margin-top: 2px;
+  }
+
+  .career-period {
+    font-size: 12px;
+    color: var(--text-3);
+    white-space: nowrap;
+    padding-top: 3px;
+    letter-spacing: 0.03em;
+  }
+
+  .career-desc {
+    font-size: 0.93rem;
+    color: var(--text-2);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .career-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .career-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text-3);
+    letter-spacing: 0.02em;
+  }
+
+  /* ARTICLES */
+  #articles { background: var(--ink); }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+
+  .article-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    display: block;
+    transition: all 0.25s;
+    position: relative;
+  }
+
+  .article-card:hover {
+    border-color: var(--border-accent);
+    transform: translateY(-2px);
+    background: var(--surface-3);
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.75rem;
+  }
+
+  .article-cat {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--accent-muted);
+    border: 1px solid var(--border-accent);
+    color: var(--accent-bright);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  .article-date {
+    font-size: 12px;
+    color: var(--text-3);
+  }
+
+  .article-title {
+    font-family: var(--display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-1);
+    line-height: 1.4;
+    margin-bottom: 0.6rem;
+  }
+
+  .article-excerpt {
+    font-size: 0.875rem;
+    color: var(--text-2);
+    line-height: 1.65;
+  }
+
+  .article-arrow {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    color: var(--accent-bright);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.2s;
+    font-size: 18px;
+  }
+
+  .article-card:hover .article-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* BLOG / HOBBIES */
+  #hobbies { background: var(--surface); }
+
+  .hobbies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+
+  .hobby-card {
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .hobby-card:hover {
+    border-color: var(--border-accent);
+  }
+
+  .hobby-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: var(--accent-muted);
+    border: 1px solid var(--border-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 1rem;
+  }
+
+  .hobby-title {
+    font-family: var(--display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-1);
+    margin-bottom: 0.4rem;
+  }
+
+  .hobby-body {
+    font-size: 0.9rem;
+    color: var(--text-2);
+    line-height: 1.65;
+  }
+
+  /* CONTACT / FOOTER */
+  #contact { background: var(--ink-3); }
+
+  .contact-inner {
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .contact-inner .section-title { margin-bottom: 1rem; }
+
+  .contact-sub {
+    color: var(--text-2);
+    margin-bottom: 2rem;
+  }
+
+  .contact-grid {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  footer {
+    background: var(--ink);
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-3);
+  }
+
+  /* NETWORK CANVAS ANIMATION */
+  canvas#net {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .bio-grid { grid-template-columns: 1fr; }
+    .bio-avatar-wrap { position: static; }
+    .bio-avatar { max-width: 200px; }
+    .nav-links { display: none; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* SUBTLE SCROLL FADE */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
 </head>
 <body>
-    <h1>Andrii Danylov</h1>
-    <h2>Network Infrastructure, Security & Automation Engineer</h2>
 
-    <p>
-        Designing reliable, observable, and secure enterprise and cloud networks.
-    </p>
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Andrii<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#bio">About</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#career">Career</a></li>
+    <li><a href="#articles">Writing</a></li>
+    <li><a href="#hobbies">Life</a></li>
+    <li><a href="resume.pdf" download class="nav-cta">Resume ↓</a></li>
+  </ul>
+</nav>
 
-    <h3>Featured Projects</h3>
+<!-- HERO -->
+<section id="hero">
+  <canvas id="net" class="hero-canvas"></canvas>
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow">Network Security Engineer · Boca Raton, FL</p>
+      <h1 class="hero-name">I build networks<br>that <em>don't fail.</em></h1>
+      <p class="hero-subtitle">14+ years of enterprise networking and cloud security — from co-founding a wireless ISP outside Kyiv to architecting Zero Trust infrastructure for mid-market enterprises in the US.</p>
+      <div class="hero-actions">
+        <a href="#bio" class="btn btn-primary">Read my story</a>
+        <a href="resume.pdf" download class="btn btn-outline">Download resume</a>
+        <a href="https://linkedin.com/in/andrii" target="_blank" class="btn btn-outline">LinkedIn</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-num">14+</div>
+          <div class="stat-label">Years in networking</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">Zero Trust</div>
+          <div class="stat-label">SASE / Cato Networks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">AWS / EKS</div>
+          <div class="stat-label">Cloud infrastructure</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">MSc</div>
+          <div class="stat-label">Computer Systems Engineering</div>
+        </div>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</section>
 
-    <ul>
-        <li>Zero Trust SASE Transformation</li>
-        <li>Hybrid AWS / OCI Networking</li>
-        <li>Network Automation Framework</li>
-        <li>Incident Response Engineering</li>
-    </ul>
+<!-- BIO -->
+<section id="bio">
+  <div class="container">
+    <div class="bio-grid">
+      <div class="bio-avatar-wrap fade-in">
+        <div class="bio-avatar">
+          <span class="avatar-initials">A</span>
+        </div>
+        <div class="bio-links">
+          <a href="https://linkedin.com/in/andrii" target="_blank" class="bio-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn Profile
+          </a>
+          <a href="resume.pdf" download class="bio-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16l4-4m0 0l-4-4m4 4H8M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Download Resume (PDF)
+          </a>
+          <a href="mailto:andrii@example.com" class="bio-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            andrii@example.com
+          </a>
+        </div>
+      </div>
 
-    <p>
-        LinkedIn:
-        <a href="https://www.linkedin.com/in/andriidanylov/">Profile</a>
-    </p>
+      <div class="bio-content fade-in">
+        <p class="section-eyebrow">About</p>
+        <h2 class="section-title">Infrastructure engineer with a security-first mindset</h2>
+        <p>I'm a network security engineer based in South Florida with over 14 years of hands-on experience spanning enterprise networking, cloud security, and identity infrastructure. My work lives at the intersection of connectivity and security — making systems faster, more resilient, and harder to compromise.</p>
+        <p>Before moving to the US, I co-founded a wireless ISP in the Kyiv suburbs, which remains one of the most formative experiences of my career: we built real infrastructure from the ground up, figured out routing on the fly, and learned what it means to own a network end-to-end. I carried that operator mindset into everything since.</p>
+        <p>Today I focus on Zero Trust / SASE architecture (Cato Networks), AWS/EKS security, Microsoft 365 / Entra ID, and endpoint security tooling — EDR, RMM, DLP. I lead proof-of-concept engagements, drive competitive displacements, and build Python/API automation that turns manual processes into repeatable infrastructure.</p>
+        <p>I hold an MS in Computer Systems Engineering and a background in physics from Kyiv National University. I care about systems that are understood deeply before they are operated confidently.</p>
+        <div class="bio-expertise">
+          <span class="tag">Zero Trust / SASE</span>
+          <span class="tag">Cato Networks</span>
+          <span class="tag">AWS / EKS</span>
+          <span class="tag">Microsoft Entra ID</span>
+          <span class="tag">Python / API Automation</span>
+          <span class="tag">EDR / DLP</span>
+          <span class="tag">Ruckus Wireless</span>
+          <span class="tag">Hack The Box</span>
+          <span class="tag">Penetration Testing</span>
+          <span class="tag">VPC Flow Logs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="container">
+    <p class="section-eyebrow fade-in">Origin story</p>
+    <h2 class="section-title fade-in">How a physics student became a network builder</h2>
+    <p style="color: var(--text-2); max-width: 620px; margin-bottom: 0;" class="fade-in">The path from theoretical physics to enterprise network security isn't a straight line — but in retrospect, every step made the next one possible.</p>
+
+    <div class="story-timeline">
+      <div class="story-node fade-in">
+        <div class="story-year">Early 2000s · Kyiv</div>
+        <h3>Physics first — then the internet arrived</h3>
+        <p>I started my undergraduate degree in physics at Kyiv National University, drawn to understanding how things work at a fundamental level. Then broadband internet hit the Kyiv suburbs. Neighbors needed connectivity. I got curious about how wireless links actually worked. That curiosity led somewhere unexpected.</p>
+      </div>
+
+      <div class="story-node fade-in">
+        <div class="story-year">Mid-2000s · Kyiv suburbs</div>
+        <h3>Co-founding a wireless ISP — infrastructure from scratch</h3>
+        <p>Along with a partner, I co-founded a wireless internet service provider serving the suburban Kyiv area. We designed the topology, sourced the radios, configured the routing — no playbook, just first principles. We were responsible for uptime for real customers who needed their connection to work. That experience crystallized something for me: networking isn't abstract. It's the infrastructure that everything else depends on.</p>
+      </div>
+
+      <div class="story-node fade-in">
+        <div class="story-year">Late 2000s · United States</div>
+        <h3>Graduate school and the shift to enterprise</h3>
+        <p>I relocated to the US to complete my MS in Computer Systems Engineering, which bridged the gap between the operator instincts I'd developed running the ISP and the formal systems knowledge needed to work at enterprise scale. I learned to think in architectures, not just configurations.</p>
+      </div>
+
+      <div class="story-node fade-in">
+        <div class="story-year">2010s · Enterprise networking</div>
+        <h3>Building expertise across the enterprise stack</h3>
+        <p>Over the next decade I accumulated deep hands-on experience across switching, wireless, firewall, identity, and eventually cloud. I ran competitive displacement projects, led Proof-of-Concept engagements, and built API-driven automation to eliminate the manual overhead that makes security teams slow. The through-line: understand the system at depth, then make it better.</p>
+      </div>
+
+      <div class="story-node fade-in">
+        <div class="story-year">Present · South Florida</div>
+        <h3>Cloud security, Zero Trust, and what's next</h3>
+        <p>Today I work at the convergence of network engineering and cloud security — Zero Trust architecture, Cato SASE, AWS/EKS, Microsoft Entra ID, and endpoint security. I run local AI inference for penetration testing research and work through Hack The Box to stay sharp on offensive techniques. The physics student from Kyiv is still asking: how does this actually work? What breaks? How do we build something that doesn't?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER -->
+<section id="career">
+  <div class="container">
+    <p class="section-eyebrow fade-in">Experience</p>
+    <h2 class="section-title fade-in">Career path</h2>
+    <div class="career-grid">
+
+      <div class="career-card fade-in">
+        <div class="career-header">
+          <div>
+            <div class="career-role">Network Security Engineer</div>
+            <div class="career-company">Enterprise — South Florida</div>
+          </div>
+          <div class="career-period">2018 – Present</div>
+        </div>
+        <p class="career-desc">Lead architect for Zero Trust / SASE deployments using Cato Networks. Manage AWS/EKS security infrastructure including VPC Flow Log analysis and security group remediation. Drive Microsoft 365 and Entra ID identity security initiatives. Built Python-based monitoring automation (Cato POP health tool) with Slack/email alerting via three-source API architecture. Lead PoC engagements and competitive network displacements.</p>
+        <div class="career-tags">
+          <span class="career-tag">Cato Networks / SASE</span>
+          <span class="career-tag">AWS / EKS</span>
+          <span class="career-tag">Microsoft Entra ID</span>
+          <span class="career-tag">Python / API</span>
+          <span class="career-tag">EDR / DLP / RMM</span>
+          <span class="career-tag">VPC Flow Logs</span>
+        </div>
+      </div>
+
+      <div class="career-card fade-in">
+        <div class="career-header">
+          <div>
+            <div class="career-role">Senior Network Engineer</div>
+            <div class="career-company">Enterprise Infrastructure</div>
+          </div>
+          <div class="career-period">2013 – 2018</div>
+        </div>
+        <p class="career-desc">Designed and managed enterprise wireless and LAN infrastructure. Led a competitive Meraki → Ruckus displacement at Cinch Home Services, leveraging Ruckus BeamFlex+, ChannelFly, DPSK3, and RUCKUS Analytics to solve density and roaming challenges. Developed structured PoC evaluation frameworks used across multiple customer accounts.</p>
+        <div class="career-tags">
+          <span class="career-tag">Ruckus Wireless</span>
+          <span class="career-tag">Enterprise LAN</span>
+          <span class="career-tag">Network Displacement</span>
+          <span class="career-tag">PoC Leadership</span>
+          <span class="career-tag">DPSK3</span>
+        </div>
+      </div>
+
+      <div class="career-card fade-in">
+        <div class="career-header">
+          <div>
+            <div class="career-role">Network Engineer</div>
+            <div class="career-company">Mid-market Enterprise</div>
+          </div>
+          <div class="career-period">2010 – 2013</div>
+        </div>
+        <p class="career-desc">Managed switching, routing, and firewall infrastructure across multi-site enterprise environments. Built operational disciplines around network documentation, change management, and fault isolation. First role following graduate school — translated ISP-scale thinking into structured enterprise practice.</p>
+        <div class="career-tags">
+          <span class="career-tag">Switching / Routing</span>
+          <span class="career-tag">Firewall</span>
+          <span class="career-tag">Multi-site LAN</span>
+          <span class="career-tag">Network Documentation</span>
+        </div>
+      </div>
+
+      <div class="career-card fade-in">
+        <div class="career-header">
+          <div>
+            <div class="career-role">Co-Founder / Network Operator</div>
+            <div class="career-company">Wireless ISP · Kyiv, Ukraine</div>
+          </div>
+          <div class="career-period">2005 – 2008</div>
+        </div>
+        <p class="career-desc">Co-founded and operated a wireless broadband ISP serving suburban Kyiv. Designed wireless topology, configured routing and addressing from scratch, and managed end-to-end operations — customer support, billing, field installation, and uptime. The foundational experience that made everything else possible.</p>
+        <div class="career-tags">
+          <span class="career-tag">Wireless ISP</span>
+          <span class="career-tag">BGP / Routing</span>
+          <span class="career-tag">Network Design</span>
+          <span class="career-tag">Operations</span>
+          <span class="career-tag">Co-Founder</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section id="articles">
+  <div class="container">
+    <p class="section-eyebrow fade-in">Writing</p>
+    <h2 class="section-title fade-in">Professional articles</h2>
+    <p style="color: var(--text-2); max-width: 580px; margin-bottom: 0;" class="fade-in">Practitioner-level writing on cloud security, Zero Trust architecture, identity governance, and the real-world tradeoffs of enterprise infrastructure decisions.</p>
+
+    <div class="articles-grid">
+
+      <a href="#" class="article-card fade-in">
+        <div class="article-meta">
+          <span class="article-cat">Identity</span>
+          <span class="article-date">2025</span>
+        </div>
+        <div class="article-title">Microsoft Copilot and the AI Governance Gap: What Security Teams Are Missing</div>
+        <p class="article-excerpt">Most M365 deployments expose sensitive data to Copilot before governance controls are in place. Here's what that looks like in practice — and how to fix it.</p>
+        <span class="article-arrow">→</span>
+      </a>
+
+      <a href="#" class="article-card fade-in">
+        <div class="article-meta">
+          <span class="article-cat">Zero Trust</span>
+          <span class="article-date">2025</span>
+        </div>
+        <div class="article-title">Entra Private Access for On-Prem AD: What Public Preview Gets Right (and What's Still Missing)</div>
+        <p class="article-excerpt">A hands-on evaluation of Microsoft's Global Secure Access for replacing traditional VPN access to on-premises Active Directory workloads.</p>
+        <span class="article-arrow">→</span>
+      </a>
+
+      <a href="#" class="article-card fade-in">
+        <div class="article-meta">
+          <span class="article-cat">AWS</span>
+          <span class="article-date">2024</span>
+        </div>
+        <div class="article-title">EKS Security Group Remediation at Scale: A Flow Logs-Driven Approach</div>
+        <p class="article-excerpt">How to extract actionable IP intelligence from VPC Flow Logs via CloudWatch Logs Insights, split it by scope, and drive security group cleanup without service disruption.</p>
+        <span class="article-arrow">→</span>
+      </a>
+
+      <a href="#" class="article-card fade-in">
+        <div class="article-meta">
+          <span class="article-cat">SASE</span>
+          <span class="article-date">2024</span>
+        </div>
+        <div class="article-title">Building a Cato POP Health Monitor: Three-Source Architecture with Slack Alerting</div>
+        <p class="article-excerpt">Why a single API source isn't enough for POP health visibility — and how combining CMA snapshot, accountMetrics, and StatusHub gives you real signal.</p>
+        <span class="article-arrow">→</span>
+      </a>
+
+      <a href="#" class="article-card fade-in">
+        <div class="article-meta">
+          <span class="article-cat">Endpoint Security</span>
+          <span class="article-date">2024</span>
+        </div>
+        <div class="article-title">What Zoho Assist Shell-Drop Patterns Actually Look Like in EDR Telemetry</div>
+        <p class="article-excerpt">A practical walkthrough of identifying remote-access tool abuse patterns — WMI activity, shell drops, process chains — without a SIEM, using EDR query alone.</p>
+        <span class="article-arrow">→</span>
+      </a>
+
+      <a href="#" class="article-card fade-in">
+        <div class="article-meta">
+          <span class="article-cat">Network Design</span>
+          <span class="article-date">2023</span>
+        </div>
+        <div class="article-title">Connectivity Debt: The Hidden Cost of Deferred Network Infrastructure Investment</div>
+        <p class="article-excerpt">A framework for quantifying and communicating the business risk of aging wireless and LAN infrastructure — useful for budget conversations with non-technical stakeholders.</p>
+        <span class="article-arrow">→</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOBBIES / BLOG -->
+<section id="hobbies">
+  <div class="container">
+    <p class="section-eyebrow fade-in">Life outside work</p>
+    <h2 class="section-title fade-in">The other stack</h2>
+    <p style="color: var(--text-2); max-width: 580px;" class="fade-in">Engineering bleeds into everything. These are the places I find the same satisfaction outside of work — building, going fast, or understanding how things actually work.</p>
+
+    <div class="hobbies-grid">
+
+      <div class="hobby-card fade-in">
+        <div class="hobby-icon">🪁</div>
+        <div class="hobby-title">Kiteboarding</div>
+        <p class="hobby-body">South Florida is one of the best places in the country for it. There's something about reading wind and water conditions in real time that scratches the same itch as network troubleshooting — every session is different, nothing is deterministic, and the feedback loop is instant.</p>
+      </div>
+
+      <div class="hobby-card fade-in">
+        <div class="hobby-icon">🏎</div>
+        <div class="hobby-title">Enthusiast cars</div>
+        <p class="hobby-body">Currently building out a 2026 VW GTI S — ceramic coating, paint protection film, and incremental mods. I like cars the same way I like networks: understanding them at the component level before touching anything, and making deliberate changes I can explain.</p>
+      </div>
+
+      <div class="hobby-card fade-in">
+        <div class="hobby-icon">🔐</div>
+        <div class="hobby-title">Hack The Box & red team research</div>
+        <p class="hobby-body">I run a local AI inference stack on a Mac Mini M4 with Ollama for penetration testing research, remotely accessible on a security-first setup. Working through HTB challenges keeps offensive technique knowledge sharp — important for a defender who needs to think like an attacker.</p>
+      </div>
+
+      <div class="hobby-card fade-in">
+        <div class="hobby-icon">🏃</div>
+        <div class="hobby-title">Community running</div>
+        <p class="hobby-body">Active in local South Florida running groups. Running is one of those rare activities where showing up consistently beats everything else — a useful reminder when debugging complex network issues that sometimes the answer is just methodical iteration.</p>
+      </div>
+
+      <div class="hobby-card fade-in">
+        <div class="hobby-icon">⚛️</div>
+        <div class="hobby-title">Physics (still)</div>
+        <p class="hobby-body">The physics undergrad never fully left. I still revisit thermodynamics and electromagnetism through the Feynman method — relearning what I thought I knew until I can explain it to someone without using jargon. Relevant to optical communications, RF propagation, and more.</p>
+      </div>
+
+      <div class="hobby-card fade-in">
+        <div class="hobby-icon">🔧</div>
+        <div class="hobby-title">Home infrastructure & DIY</div>
+        <p class="hobby-body">Lake Worth homeowner who would rather understand how an appliance or HVAC system works than call a technician to fix it. Same diagnostic instinct as network troubleshooting — isolate the variable, read the signal, test the hypothesis.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <p class="section-eyebrow fade-in">Get in touch</p>
+      <h2 class="section-title fade-in">Let's talk infrastructure</h2>
+      <p class="contact-sub fade-in">Open to conversations about solutions engineering, network security architecture, and building things that scale. Reach out directly or connect on LinkedIn.</p>
+      <div class="contact-grid fade-in">
+        <a href="mailto:andrii@example.com" class="btn btn-primary">Send an email</a>
+        <a href="https://linkedin.com/in/andrii" target="_blank" class="btn btn-outline">LinkedIn</a>
+        <a href="resume.pdf" download class="btn btn-outline">Resume (PDF)</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Andrii · Network Security Engineer · Boca Raton, FL · Built with intention.</p>
+</footer>
+
+<script>
+// Network canvas animation
+(function() {
+  const canvas = document.getElementById('net');
+  const ctx = canvas.getContext('2d');
+  let W, H, nodes, animId;
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function initNodes() {
+    nodes = [];
+    const count = Math.floor((W * H) / 18000);
+    for (let i = 0; i < count; i++) {
+      nodes.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 2 + 1
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    for (let i = 0; i < nodes.length; i++) {
+      const n = nodes[i];
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(59,130,246,0.7)';
+      ctx.fill();
+
+      for (let j = i + 1; j < nodes.length; j++) {
+        const m = nodes[j];
+        const dx = n.x - m.x;
+        const dy = n.y - m.y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 140) {
+          ctx.beginPath();
+          ctx.moveTo(n.x, n.y);
+          ctx.lineTo(m.x, m.y);
+          ctx.strokeStyle = `rgba(59,130,246,${0.18 * (1 - d / 140)})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+    animId = requestAnimationFrame(draw);
+  }
+
+  function start() {
+    resize();
+    initNodes();
+    draw();
+  }
+
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(animId);
+    start();
+  });
+
+  start();
+})();
+
+// Scroll fade-in
+(function() {
+  const els = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(el => observer.observe(el));
+})();
+</script>
 </body>
 </html>
