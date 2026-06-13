@@ -123,6 +123,22 @@
     align-items: center;
   }
 
+  .hero-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-photo img {
+    width: 360px;
+    height: 360px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+  
   .hero-eyebrow {
     font-size: 12px;
     letter-spacing: 0.15em;
@@ -768,14 +784,41 @@
   }
 
   /* MOBILE */
-  @media (max-width: 768px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
-    .bio-grid { grid-template-columns: 1fr; }
-    .bio-avatar-wrap { position: static; }
-    .bio-avatar { max-width: 200px; }
-    .nav-links { display: none; }
-    .hero-stats { grid-template-columns: 1fr 1fr; }
-  }
+@media (max-width: 768px) {
+    .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .hero-photo {
+        order: -1;
+    }
+
+    .hero-photo img {
+        width: 240px;
+        height: 240px;
+    }
+
+    .bio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bio-avatar-wrap {
+        position: static;
+    }
+
+    .bio-avatar {
+        max-width: 200px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+}
 
   /* SUBTLE SCROLL FADE */
   .fade-in {
@@ -837,7 +880,9 @@
         </div>
       </div>
     </div>
-    <div></div>
+    <div class="hero-photo">
+    <img src="images/andrii.jpg" alt="Andrii Danylov">
+</div>
   </div>
 </section>
 
